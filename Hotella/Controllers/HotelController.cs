@@ -29,7 +29,7 @@ namespace Hotella.Controllers
         
         public string BrowseBy()
         {
-            return "Browse by Information";
+            return "Browse by Information.";
         }
         public string Stories()
         {
