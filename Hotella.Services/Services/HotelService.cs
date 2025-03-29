@@ -39,7 +39,19 @@ namespace Hotella.Services.Services
                 _logger.LogError("Error occurred while creating hotel {} {}", ex.Message, ex);
             }
         }
-
+        public Hotel SelectHotel(string hotelName)
+        {
+            Hotel hotel = DataBase.HotelDataStore.hotels.FirstOrDefault(h => h.Name == hotelName);
+            if (hotel == null)
+            {
+                return null;
+            }
+            return hotel;
+        }
+        public List<Hotel> GetHotelsByFeature(HotelFeature feature)
+        {
+            return DataBase.HotelDataStore.hotels.Where(h => h.Features.Contains(feature)).ToList();
+        }
         public List<Hotel> GetHotels()
         {
             if (DataBase.HotelDataStore.hotels.Count() > 0)
@@ -47,7 +59,7 @@ namespace Hotella.Services.Services
                 try
                 {
                     List<Hotel> hotels = DataBase.HotelDataStore.hotels;
-                    _logger.LogInformation("Books returned successfully");
+                    _logger.LogInformation("hotels returned successfully");
                     return hotels;
                 }
                 catch (Exception ex)
@@ -78,6 +90,7 @@ namespace Hotella.Services.Services
                 }
             }
         }
+
         public void DeleteHotel(string id)
         {
             if (DataBase.HotelDataStore.hotels.Count() > 0)

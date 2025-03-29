@@ -13,6 +13,9 @@ namespace Hotella.Services.Interfaces
         void Create(HotelCreationDto hotelCreationDto);
 
         List<Hotel> GetHotels();
+        List<Hotel> GetHotelsByFeature(HotelFeature feature);
+        Hotel SelectHotel(string hotelName);
+
 
         void DeleteHotel(string id);
 
