@@ -12,6 +12,8 @@ namespace Hotella.Entities.Entities
         Abuja,
         Jos,
         Portharcourt,
-        Calabar
+        Calabar,
+        Ibadan,
+        Lokoja
     }
 }

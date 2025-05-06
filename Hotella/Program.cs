@@ -2,6 +2,7 @@ using Hotella.Controllers;
 using Hotella.ViewModels;
 using Hotella.Services.Services;
 using Hotella.Services.Interfaces;
+using Hotella.DataBase;
 
 namespace Hotella
 {
@@ -16,6 +17,9 @@ namespace Hotella
             builder.Services.AddScoped<IHotelService, HotelService>();
             builder.Services.AddScoped<HotelsViewModel>();
             builder.Services.AddScoped<HotelController>();
+            builder.Services.AddScoped<DbHelper>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
+
 
             var app = builder.Build();
 

@@ -13,7 +13,9 @@ namespace Hotella.Entities.Entities
         public int TravelerId { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal PricePerNight { get; set; } // Add price per night
+        public decimal TotalPrice => (CheckOutDate - CheckInDate).Days * PricePerNight;
+        public int NumberOfNights => (CheckOutDate - CheckInDate).Days;
         public BookingStatus BookingStatus { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public int NumberOfGuests { get; set; }

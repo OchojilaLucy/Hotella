@@ -1,0 +1,14 @@
+﻿# Ignore user-specific and build files
+*.user
+*.suo
+.vs/
+bin/
+obj/
+
+# Ignore sensitive config
+Web.config
+appsettings.json
+
+# Ignore local DB files
+*.mdf
+*.ldf

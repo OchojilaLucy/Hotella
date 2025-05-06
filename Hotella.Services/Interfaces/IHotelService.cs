@@ -13,11 +13,11 @@ namespace Hotella.Services.Interfaces
         void Create(HotelCreationDto hotelCreationDto);
 
         List<Hotel> GetHotels();
-        List<Hotel> GetHotelsByFeature(HotelFeature feature);
-        Hotel SelectHotel(string hotelName);
+        List<Hotel> GetHotelsByFeature(string feature);
+        //Hotel SelectHotel(string hotelName);
 
-
-        void DeleteHotel(string id);
+        Hotel? GetHotel(string hotelName);
+        void DeleteHotel(int id);
 
 
         void UpdateHotel(HotelUpdateDto hotelUpdateDto);

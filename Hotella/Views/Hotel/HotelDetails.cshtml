@@ -1,4 +1,7 @@
-﻿@model Hotella.Entities.Entities.Hotel
+﻿@using Hotella.ViewModels
+@model HotelsViewModel
+
+
 
 @{
     ViewData["Title"] = Model.Name;
@@ -9,7 +12,65 @@
     <img src="@Url.Content(Model.ImageUrl)" class="img-fluid" alt="@Model.Name" />
     <p><strong>City:</strong> @Model.City</p>
     <p><strong>Price:</strong> $@Model.Price per night</p>
-    <p><strong>Features:</strong> @Model.Features</p>
+    <p><strong>Features:</strong> </p>
+        <ul>
+            @foreach (var feature in Model.Features.Distinct()) // Ensure each feature is listed only once
+            {
+                var featureCount = Model.Features.Count(f => f == feature); // Count how many times this feature appears
+                <li>@featureCount @feature       (s) </li> <!-- Display feature and its count -->
+            }
+        </ul>
+        <h3>Start Booking</h3>
+    <p><strong>Price:</strong> <span id="totalPrice">$@Model.Price USD</span></p>
+
+    <label>How long will you stay?</label>
+    <button type="button" onclick="updateNights(-1)">-</button>
+    <span id="nightCount">@Model.NumberOfNights</span> nights
+    <button type="button" onclick="updateNights(1)">+</button>
+
+    <label>Pick a Date:</label>
+    <input type="date" id="checkInDate" value="@Model.CheckInDate.ToString("yyyy-MM-dd")" onchange="updateCheckout()" />
+    <input type="date" id="checkOutDate" value="@Model.CheckOutDate.ToString("yyyy-MM-dd")" readonly />
+
+    <p>You will pay <strong><span id="totalPrice">$@Model.TotalPrice USD</span></strong> for <span id="totalNights">@Model.NumberOfNights</span> nights.</p>
+
+
+   
     <a href="@Url.Action("HotelsDisplay", "Hotel")" class="btn btn-secondary">Back to Hotels</a>
-    <a href="#" class="btn btn-primary">Book Now</a>
+    <button class="btn btn-primary">Continue to Book</button>
 </div>
+<script>
+    function updateNights(change) {
+        let nightCountElem = document.getElementById("nightCount");
+        let checkInDateElem = document.getElementById("checkInDate");
+        let checkOutDateElem = document.getElementById("checkOutDate");
+        let totalPriceElem = document.getElementById("totalPrice");
+        let totalNightsElem = document.getElementById("totalNights");
+
+        let nights = parseInt(nightCountElem.innerText) + change;
+        if (nights < 1) return; // Prevent negative nights
+
+        // Update checkout date
+        let checkInDate = new Date(checkInDateElem.value);
+        let checkOutDate = new Date(checkInDate);
+        checkOutDate.setDate(checkOutDate.getDate() + nights);
+        checkOutDateElem.valueAsDate = checkOutDate;
+
+        // Update UI
+        nightCountElem.innerText = nights;
+        totalNightsElem.innerText = nights;
+        let pricePerNight = @Model.hotel.Price;
+        totalPriceElem.innerText = "$" + (pricePerNight * nights) + " USD";
+    }
+
+    function updateCheckout() {
+        let checkInDateElem = document.getElementById("checkInDate");
+        let checkOutDateElem = document.getElementById("checkOutDate");
+
+        let checkInDate = new Date(checkInDateElem.value);
+        let checkOutDate = new Date(checkInDate);
+        checkOutDate.setDate(checkOutDate.getDate() + parseInt(document.getElementById("nightCount").innerText));
+        checkOutDateElem.valueAsDate = checkOutDate;
+    }
+</script>
+

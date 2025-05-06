@@ -9,10 +9,11 @@ namespace Hotella.Entities.Dtos
 {
     public class HotelUpdateDto
     {
+        
         public string Name { get; set; }
-        public List<HotelFeature> Features { get; set; } = new List<HotelFeature>();
+        public List<string> Features { get; set; } = new List<string>();
         public City City { get; set; }
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string ImageUrl { get; set; }
         public decimal Price { get; set; }
     }
