@@ -5,11 +5,17 @@ This is a simple hotel booking web application built with ASP.NET MVC and ADO.NE
 
 1. Clone the repository: https://github.com/OchojilaLucy/Hotella
    
-2. Set up your database using the SQL script in `/database/setup.sql`.
+2. Set up your database: Run the SQL script in /Hotella.DataBase/setup.sql using SQL Server Management Studio (SSMS).
 
-3. Copy the example config file: copy appsettings.example.json appsettings.json
-   Edit `appsettings.json` with your SQL Server connection string.
-4. Open in Visual Studio and press F5 to run.
+3. Configure your connection string: Copy the example config file:
+
+   |bash                                           |
+   |copy appsettings.example.json appsettings.json |
+    Open appsettings.json and replace the placeholder values with your actual SQL Server credentials.
+
+4. Run the project: Open the solution in Visual Studio.
+   Press F5 to build and run the application.
+
 
 ## 🔒 Security
 
